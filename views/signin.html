@@ -45,7 +45,7 @@
 				//获取表单数据
 				var data = $(this).serialize();//数据类型为字符串
 				//发送ajax请求
-				$.post("/sign",data,(info) => {
+				$.post("/signin",data,(info) => {
 					alert(info.mess);
 					if(info.code == 200)						
 						//重定向

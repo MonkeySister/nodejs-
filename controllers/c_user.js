@@ -23,15 +23,25 @@ exports.userForm = (req, res) => {
 				mess: "邮箱不存在！"
 			});
 		//验证密码是否正确
-		if(data[0].password != req.body.password)
+		if(data[0].password !== req.body.password)
 			return res.send({
 				code: 204,
 				mess: "密码错误！"
 			});
+		//登陆成功,保存用户信息到session中
+		req.session.user = data[0];//是一个对象
+		//console.log(req.session.user);
 		//返回响应
 		res.send({
 			code: 200,
 			mess: "登陆成功"
 		});
 	});
+};
+//用户退出功能
+exports.signinOut = (req,res) =>{
+	//删除session
+	delete req.session.user;
+	//a标识请求为同步请求，可以在服务端进行页面跳转
+	res.redirect("/signin");
 };
